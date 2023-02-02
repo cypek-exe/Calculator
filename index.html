@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Kalkulator</title>
+</head>
+<body>
+    <div id="errorField"><div><strong>Błąd: </strong>Skrypty JavaScript nie zostały wczytane poprawnie. Zaleca się odświerzenie strony, jeśli to nie pomoże, warto sprawdzić czy nie ma się <a href="https://www.enable-javascript.com/pl/" target="_blank">zablokowanych skryptów</a>.</div></div>
+    <fieldset>
+        <legend>Kalkulator</legend>
+        <form action="" method="post">
+            <input type="number" name="firstNumber" id="firstNumber" placeholder="Skrypty nie działają poprawnie" required>
+            <select id="select" required onchange="refreshSelect()">
+                <option value="d1">+</option>
+                <option value="d2">-</option>
+                <option value="d3">×</option>
+                <option value="d4">÷</option>
+                <option value="d5">^</option>
+                <option value="d6">√</option>
+                <option value="d7">log</option>
+            </select>
+            <input type="number" name="secondNumber" id="secondNumber" placeholder="Skrypty nie działają poprawnie" required>
+            <span>= </span><span id="result"></span><br>
+            <div class="space-between">
+                <input type="button" value="Oblicz" onclick="equal()">
+                <input type="button" value="Odwróć" onclick="reverse()">
+                <input type="button" value="Dodaj do historii" onclick="addToHistory()">
+            </div>
+        </form>
+    </fieldset>
+    <span>Historia:</span>
+    <div id="docHistory"></div>
+    <script src="app.js"></script>
+</body>
+</html>
