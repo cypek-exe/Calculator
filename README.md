@@ -1,20 +1,34 @@
 # Kalkulator
  Kalkulator w HTML, CSS i JS
-
-Kalkulator potrafi:<br>
-    1. Wykonywać wybrane działania matematyczne:
-        - dodawanie
-        - odejmowanie
-        - mnożenie
-        - dzielenie
-        - potęgowanie
-        - pierwiastkowanie
-        - logarytmowanie
-    2. Zapisywać historie wykonywanych działań matematycznych w:
-        - local storage
-        - (jeżeli ciasteczka są nie dostępne) tablica w JavaScript
-    3. Wypisywać błędy związane z wykonywaniem działań w tym:
-        - dzielenie przez zero
-        - błędy związane z logarytmowaniem
-
-Niezbędnym do działania kalkulatora jest obsługa skryptów (JavaScript).
+<br>
+<p>Kalkulator potrafi:</p>
+<ol>
+ <li>
+  Wykonywać wybrane działania matematyczne:
+  <ul>
+   <li>dodawanie</li>
+   <li>odejmowanie</li>
+   <li>mnożenie</li>
+   <li>dzielenie</li>
+   <li>potęgowanie</li>
+   <li>pierwiastkowanie</li>
+   <li>logarytmowanie</li>
+  </ul>
+ </li>
+ <li>
+  Zapisywać historie wykonywanych działań matematycznych w:
+  <ul>
+   <li>local storage</li>
+   <li>(jeżeli ciasteczka są nie dostępne) tablica w JavaScript</li>
+  </ul>
+ </li>
+ <li>
+  Wypisywać błędy związane z wykonywaniem działań w tym:
+  <ul>
+   <li>dzielenie przez zero</li>
+   <li>błędy związane z logarytmowaniem</li>
+  </ul>
+ </li>
+</ol>
+<br>
+<p>Niezbędnym do działania kalkulatora jest obsługa skryptów (JavaScript).</p>
