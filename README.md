@@ -1,7 +1,7 @@
 # Kalkulator
  Kalkulator w HTML, CSS i JS
 
-Kalkulator potrafi:
+Kalkulator potrafi:<br>
     1. Wykonywać wybrane działania matematyczne:
         - dodawanie
         - odejmowanie
