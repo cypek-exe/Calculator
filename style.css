@@ -1,5 +1,14 @@
+:root{
+    --background-color: #202124;
+    --primary-color: #e8eaed;
+    --secondary-color: #3c4043;
+}
+*{
+    color: var(--primary-color);
+}
 html{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background-color);
 }
 body{
     width: fit-content;
@@ -7,7 +16,7 @@ body{
 }
 fieldset{
     margin: 10px;
-    border-color: black;
+    border-color: var(--primary-color);
     border-radius: 10px;
 }
 .space-between{
@@ -22,4 +31,37 @@ fieldset{
 }
 input[type=number]{
     width: 160px;
+    outline: none;
+}
+input{
+    background-color: var(--background-color);
+    border: 1px var(--secondary-color) solid;
+    margin: 2px;
+
+}
+select{
+    background-color: var(--background-color);
+    border: 1px var(--secondary-color) solid;
+}
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.historyRecord{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #3c4043;
+    margin: 4px 5px 0 5px;
+    padding: 5px 5px 0 5px;
+}
+a{
+    color: #8ab4f8;
+    text-decoration: none;
+
+
+}
+a:visited{
+    color: #c58af9;
+}
+a:hover{
+    text-decoration: underline;
 }

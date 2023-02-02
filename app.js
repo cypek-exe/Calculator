@@ -32,7 +32,7 @@ function refreshSelect(){
         secondNumber.placeholder = "liczba logarytmowana";
     };
 };
-refreshSelect()
+refreshSelect();
 
 function equal() {
     if(document.forms[0][0].value === "" || document.forms[0][2].value === "") {
@@ -55,7 +55,7 @@ function equal() {
         if(select == "d5") result.innerHTML = Math.pow(firstNumber, secondNumber);
         if(select == "d6") {
             if(secondNumber == 0) {
-                result.innerHTML += "<div><strong>Błąd: </strong>Stopień pierwiastka nie może być równy zero (0).";
+                errorField.innerHTML += "<div><strong>Błąd: </strong>Stopień pierwiastka nie może być równy zero (0).";
             }else{
                 result.innerHTML = Math.pow(secondNumber, 1/firstNumber);
             };
@@ -110,11 +110,18 @@ function addToHistory() {
         if(HistoryRecord(i)[1] == "d1") operation = " + ";
         else if(HistoryRecord(i)[1] == "d2") operation = " - ";
         else if(HistoryRecord(i)[1] == "d3") operation = " × ";
-        else if(HistoryRecord(i)[1] == "d4") operation = " ÷ ";
-        if(HistoryRecord(i)[1] == "d5") docHistory.innerHTML += "<div id='history" + i + "' class='space-between' style='border-top: 1px dashed black;'><span>" + HistoryRecord(i)[2] + "<sup>" + HistoryRecord(i)[0] + "</sup> = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
-        else if(HistoryRecord(i)[1] == "d6") docHistory.innerHTML += "<div id='history" + i + "' class='space-between' style='border-top: 1px dashed black;'><span><sup>" + HistoryRecord(i)[2] + "</sup>√" + HistoryRecord(i)[0]  + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
-        else if(HistoryRecord(i)[1] == "d7") docHistory.innerHTML += "<div id='history" + i + "' class='space-between' style='border-top: 1px dashed black;'><span>log<sub>" + HistoryRecord(i)[2] + "</sub> " + HistoryRecord(i)[0] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
-        else docHistory.innerHTML += "<div id='history" + i + "' class='space-between' style='border-top: 1px dashed black;'><span>" + HistoryRecord(i)[0] + operation + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        else if(HistoryRecord(i)[1] == "d4") {
+            operation = " ÷ ";
+        }
+        if(HistoryRecord(i)[1] == "d5") {
+            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[2] + "<sup>" + HistoryRecord(i)[0] + "</sup> = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        }else if(HistoryRecord(i)[1] == "d6") {
+            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span><sup>" + HistoryRecord(i)[2] + "</sup>√" + HistoryRecord(i)[0]  + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        }else if(HistoryRecord(i)[1] == "d7") {
+            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>log<sub>" + HistoryRecord(i)[2] + "</sub> " + HistoryRecord(i)[0] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        }else {
+            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + operation + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        }
 
         i++;
         if(typeof(Storage) !== "undefined" && navigator.cookieEnabled) localStorage.setItem("historyLength", parseInt(localStorage.getItem("historyLength")) + 1);
@@ -133,8 +140,9 @@ function deleteHistoryElement(historyID) {
 
 function restore(historyID) {
     firstNumber = document.forms[0][0];
+    select = document.forms[0][1];
     secondNumber = document.forms[0][2];
-    select = document.getElementById("select")
+    result = document.getElementById("result");
     firstNumber.value = HistoryRecord(historyID)[0];
     select.value = HistoryRecord(historyID)[1];
     secondNumber.value = HistoryRecord(historyID)[2];
@@ -160,10 +168,10 @@ if(typeof(Storage) !== "undefined" && navigator.cookieEnabled) {
                 else if(HistoryRecord(j)[1] == "d2") operation = " - ";
                 else if(HistoryRecord(j)[1] == "d3") operation = " × ";
                 else if(HistoryRecord(j)[1] == "d4") operation = " ÷ ";
-                if(HistoryRecord(j)[1] == "d5") docHistory.innerHTML += "<div id='history" + j + "' class='space-between' style='border-top: 1px dashed black;'><span>" + HistoryRecord(j)[2] + "<sup>" + HistoryRecord(j)[0] + "</sup> = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
-                else if(HistoryRecord(j)[1] == "d6") docHistory.innerHTML += "<div id='history" + j + "' class='space-between' style='border-top: 1px dashed black;'><span><sup>" + HistoryRecord(j)[2] + "</sup>√" + HistoryRecord(j)[0]  + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
-                else if(HistoryRecord(j)[1] == "d7") docHistory.innerHTML += "<div id='history" + j + "' class='space-between' style='border-top: 1px dashed black;'><span>log<sub>" + HistoryRecord(j)[2] + "</sub> " + HistoryRecord(j)[0] + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
-                else docHistory.innerHTML += "<div id='history" + j + "' class='space-between' style='border-top: 1px dashed black;'><span>" + HistoryRecord(j)[0] + operation + HistoryRecord(j)[2] + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
+                if(HistoryRecord(j)[1] == "d5") docHistory.innerHTML += "<div id='history" + j + "' class='historyRecord'><span>" + HistoryRecord(j)[2] + "<sup>" + HistoryRecord(j)[0] + "</sup> = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
+                else if(HistoryRecord(j)[1] == "d6") docHistory.innerHTML += "<div id='history" + j + "' class='historyRecord'><span><sup>" + HistoryRecord(j)[2] + "</sup>√" + HistoryRecord(j)[0]  + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
+                else if(HistoryRecord(j)[1] == "d7") docHistory.innerHTML += "<div id='history" + j + "' class='historyRecord'><span>log<sub>" + HistoryRecord(j)[2] + "</sub> " + HistoryRecord(j)[0] + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
+                else docHistory.innerHTML += "<div id='history" + j + "' class='historyRecord'><span>" + HistoryRecord(j)[0] + operation + HistoryRecord(j)[2] + " = " + HistoryRecord(j)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + j + ")'><input type='button' value='Przywróć' onclick='restore(" + j + ")'></span></div>";
             };
         };
     };
