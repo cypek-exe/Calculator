@@ -16,7 +16,7 @@ body{
 }
 fieldset{
     margin: 10px;
-    border-color: var(--primary-color);
+    border: 3px double var(--primary-color);
     border-radius: 10px;
 }
 .space-between{

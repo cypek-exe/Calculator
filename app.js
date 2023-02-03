@@ -48,23 +48,27 @@ function equal() {
         if(select == "d4") {
             if(secondNumber == 0) {
                 errorField.innerHTML += "<div><strong>Błąd: </strong>Nie można dzielić przez zero (0).</div>";
-            }else{
-                result.innerHTML = firstNumber / secondNumber;
-            };
+                result.innerHTML = "";
+            }else result.innerHTML = firstNumber / secondNumber;
         };
         if(select == "d5") result.innerHTML = Math.pow(firstNumber, secondNumber);
         if(select == "d6") {
             if(secondNumber == 0) {
-                errorField.innerHTML += "<div><strong>Błąd: </strong>Stopień pierwiastka nie może być równy zero (0).";
-            }else{
-                result.innerHTML = Math.pow(secondNumber, 1/firstNumber);
-            };
+                errorField.innerHTML += "<div><strong>Błąd: </strong>Liczba podpierwiastkowa nie może być równy zero (0).";
+                result.innerHTML = "";
+            }else result.innerHTML = Math.pow(secondNumber, 1/firstNumber);
         };
         if(select == "d7") {
-            if(firstNumber <= 0) errorField.innerHTML += "<div><strong>Błąd: </strong>Podstawa logarytmu musi być większa od zera (0).</div>";
-            else if(firstNumber == 1) errorField.innerHTML += "<div><strong>Błąd: </strong>Podstawa logarytmu musi być różna od jeden (1).</div>";
-            else if(secondNumber <= 0) errorField.innerHTML += "<div><strong>Błąd: </strong>Liczba logarytmowana musi być większa od zera (0).</div>";
-            else result.innerHTML = Math.log(secondNumber) / Math.log(firstNumber)
+            if(firstNumber <= 0) {
+                errorField.innerHTML += "<div><strong>Błąd: </strong>Podstawa logarytmu musi być większa od zera (0).</div>";
+                result.innerHTML = "";
+            }else if(firstNumber == 1) {
+                errorField.innerHTML += "<div><strong>Błąd: </strong>Podstawa logarytmu musi być różna od jeden (1).</div>";
+                result.innerHTML = "";
+            }else if(secondNumber <= 0) {
+                errorField.innerHTML += "<div><strong>Błąd: </strong>Liczba logarytmowana musi być większa od zera (0).</div>";
+                result.innerHTML = "";
+            }else result.innerHTML = Math.log(secondNumber) / Math.log(firstNumber);
         };
 
         if(result.innerHTML == "NaN") {
@@ -107,20 +111,31 @@ function addToHistory() {
         if(typeof(Storage) !== "undefined" && navigator.cookieEnabled) localStorage.setItem("history" + i, secondNumber + " " + select + " " + firstNumber + " " + result.innerHTML);
         else history.push(secondNumber + " " + select + " " + firstNumber + " " + result.innerHTML);
         
-        if(HistoryRecord(i)[1] == "d1") operation = " + ";
-        else if(HistoryRecord(i)[1] == "d2") operation = " - ";
-        else if(HistoryRecord(i)[1] == "d3") operation = " × ";
+        if(HistoryRecord(i)[1] == "d1") docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + " + " + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        else if(HistoryRecord(i)[1] == "d2") docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + " - " + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+        else if(HistoryRecord(i)[1] == "d3") docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + " × " + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
         else if(HistoryRecord(i)[1] == "d4") {
-            operation = " ÷ ";
-        }
+            if(secondNumber == 0) result.innerHTML = "";
+            else {
+                docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + " ÷ " + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>"
+            };
+        };
         if(HistoryRecord(i)[1] == "d5") {
             docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[2] + "<sup>" + HistoryRecord(i)[0] + "</sup> = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
         }else if(HistoryRecord(i)[1] == "d6") {
-            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span><sup>" + HistoryRecord(i)[2] + "</sup>√" + HistoryRecord(i)[0]  + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+            if(secondNumber == 0) result.innerHTML = "";
+            else {
+                docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span><sup>" + HistoryRecord(i)[2] + "</sup>√" + HistoryRecord(i)[0]  + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+            };
         }else if(HistoryRecord(i)[1] == "d7") {
-            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>log<sub>" + HistoryRecord(i)[2] + "</sub> " + HistoryRecord(i)[0] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+            if(firstNumber <= 0) result.innerHTML = "";
+            else if(firstNumber == 1) result.innerHTML = "";
+            else if(secondNumber <= 0) result.innerHTML = "";
+            else {
+                docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>log<sub>" + HistoryRecord(i)[2] + "</sub> " + HistoryRecord(i)[0] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+            };
         }else {
-            docHistory.innerHTML += "<div id='history" + i + "' class='historyRecord'><span>" + HistoryRecord(i)[0] + operation + HistoryRecord(i)[2] + " = " + HistoryRecord(i)[3] + "</span><span><input type='button' value='Usuń' onclick='deleteHistoryElement(" + i + ")'><input type='button' value='Przywróć' onclick='restore(" + i + ")'></span></div>";
+            
         }
 
         i++;
@@ -179,4 +194,4 @@ if(typeof(Storage) !== "undefined" && navigator.cookieEnabled) {
 
 errorField.innerHTML = "";
 if(typeof(Storage) !== "undefined" && navigator.cookieEnabled); 
-else{errorField.innerHTML = "<div><strong>Błąd: </strong>Pliki cookies są wyłączone lub local storage nie jest obsłygiwany.<br>Zobacz <a href='https://www.polskieradio.pl/13/53/artykul/675787,jak-wlaczyc-obsluge-plikow-cookie-w-swojej-przegladarce' target='_blank'>jak włączyć ciasteczka</a>.</div>"}
+else{errorField.innerHTML = "<div><strong>Błąd: </strong>Pliki cookies są wyłączone lub local storage nie jest obsłygiwany.<br>Zobacz <a href='https://www.polskieradio.pl/13/53/artykul/675787,jak-wlaczyc-obsluge-plikow-cookie-w-swojej-przegladarce' target='_blank'>jak włączyć ciasteczka</a>.</div>"};
