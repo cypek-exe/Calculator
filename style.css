@@ -1,90 +1,106 @@
-:root{
-    --background-color: #202124;
-    --primary-color: #e8eaed;
-    --secondary-color: #3c4043;
+/* entire document styles */
+:root {
+  --background-color: #202124;
+  --primary-color: #e8eaed;
+  --second-color: #3c4043;
+  --third-color: #5f6368;
 }
-*{
-    color: var(--primary-color);
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-html{
-    font-family: arial, sans-serif;
-    background-color: var(--background-color);
+html {
+  font-family: arial, sans-serif;
+  background-color: var(--background-color);
 }
-body{
-    width: fit-content;
-    margin: 0 auto;
+body {
+  width: fit-content;
+  margin: 0 auto;
 }
-fieldset{
-    margin: 10px;
-    border: 3px double var(--primary-color);
-    border-radius: 10px;
-    padding: 2.5px;
+
+/* <fieldset> tag styles */
+fieldset {
+  margin: 10px;
+  border: 3px double var(--primary-color);
+  border-radius: 10px;
+  padding: 2.5px;
 }
-#errorField{
-    width: 100%;
-    height: 150px;
-    overflow-y: auto;
-    margin: 10px;
+
+/* <a> tag styles */
+a {
+  color: #8ab4f8;
+  text-decoration: none;
 }
-#docHistory{
-    margin: 0 15px;
+a:visited {
+  color: #c58af9;
 }
-input{
-    background-color: var(--background-color);
-    border: 1px var(--secondary-color) solid;
+a:hover {
+  text-decoration: underline;
 }
-input[type="number"]{
-    padding: 5px 10px;
-    border-radius: 14px;
-    outline: none;
-    margin: 2.5px 0;
+
+/* error field styles */
+#errorField {
+  width: 100%;
+  height: 150px;
+  overflow-y: auto;
+  margin: 10px;
+}
+
+/* history styles */
+#docHistory {
+  margin: 0 15px;
+}
+.historyRecord {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--second-color);
+  align-items: center;
+}
+
+/* <input> and <select> tag styles */
+select {
+  padding: 4px 0px 4px 5px;
+  border-radius: 14px;
+  cursor: pointer;
+  margin: 2.5px 0;
+}
+input, select {
+  outline: none;
+  background-color: var(--background-color);
+  border: 1px var(--second-color) solid;
+}
+
+input[type="number"] {
+  padding: 5px 10px;
+  border-radius: 14px;
+  margin: 2.5px 0;
 }
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
-input[type="button"]{
-    background-color: var(--secondary-color);
-    border: 1px solid var(--secondary-color);
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin: 2.5px;
+input[type="button"] {
+  background-color: var(--second-color);
+  border: 1px solid var(--second-color);
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin: 2.5px;
 }
-input[type="button"]:hover{
-    border: 1px solid #5f6368;
+input:hover, select:hover, input:focus, select:focus {
+  border: 1px var(--third-color) solid;
 }
-select{
-    background-color: var(--background-color);
-    border: 1px var(--secondary-color) solid;
-    padding: 4px 0px 4px 5px;
-    border-radius: 14px;
-    cursor: pointer;
-    margin: 2.5px 0;
+@media screen and (max-width: 550px) {
+  input {
+  width: 100%;
+  }
+  select {
+  width: 100%;
+  }
 }
-.historyRecord{
-    display: flex;
-    justify-content: space-between;
-    border-top: 1px solid var(--secondary-color);
-    align-items: center;
-}
-a{
-    color: #8ab4f8;
-    text-decoration: none;
-}
-a:visited{
-    color: #c58af9;
-}
-a:hover{
-    text-decoration: underline;
-}
-@media screen and (max-width: 550px){
-    input{
-        width: 100%;
-    }
-    select{
-        width: 100%;
-    }
+
+/* checking the styles */
+#errorField #checking_the_styles {
+  display: none;
 }
