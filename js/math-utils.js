@@ -5,18 +5,18 @@ export const first_number   = document.getElementById('first_number');
 export const second_number  = document.getElementById('second_number');
 export const result_element = document.getElementById('result');
 
-const display_new_error = text => {
+function display_new_error(text) {
   error_field.innerHTML += `<div><strong>Błąd: </strong>${text}</div>`;
 }
 
-const are_values_completed = () => {
+export function are_values_completed() {
   if (first_number.value === '' || second_number.value === '') {
     display_new_error('Wszystkie pola muszą być uzupełnione')
   }
   return first_number.value !== '' && second_number.value !== '';
 }
 
-const values_validation = () => {
+function values_validation() {
   let is_there_no_error = true;
 
   const first_number_n  = +first_number.value;
@@ -52,7 +52,7 @@ const values_validation = () => {
 }
 
 
-export const equal = () => {  
+export function equal() {  
   if (are_values_completed() && values_validation()) {
 
     let result;

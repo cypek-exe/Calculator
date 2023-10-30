@@ -25,11 +25,11 @@ class History_element {
   }
 };
 
-const is_local_storage_enabled = () => {
+function is_local_storage_enabled() {
   return (typeof(Storage) !== "undefined") && navigator.cookieEnabled;
 };
 
-const get_math_operation = data => {
+function get_math_operation(data) {
   switch (data.operation) {
     case 'opt_1':
       return `${data.first_number} + ${data.second_number}`;
@@ -55,7 +55,7 @@ const get_math_operation = data => {
   }
 };
 
-const render_history_element = history_element => {
+function render_history_element(history_element) {
   history_field.innerHTML += `
     <div class="history_record">
       <span>
@@ -73,7 +73,7 @@ const render_history_element = history_element => {
 };
 
 
-export const add_to_history = () => {
+export function add_to_history() {
   const result = equal();
   if (typeof(result) === 'number') {
 
@@ -96,7 +96,7 @@ export const add_to_history = () => {
   }
 };
 
-export const delete_history_element = index => {
+export function delete_history_element(index) {
   history.splice(index, 1);
 
   history_records[index].remove();
@@ -107,7 +107,7 @@ export const delete_history_element = index => {
   } 
 };
 
-export const restore = index => {
+export function restore(index) {
   first_number.value         = history[index].first_number;
   second_number.value        = history[index].second_number;
   select.value               = history[index].operation;
@@ -117,7 +117,7 @@ export const restore = index => {
     result_element.textContent = history[index].result;
 };
 
-export const load_history = () => {
+export function load_history() {
   if (is_local_storage_enabled()) {
     if (localStorage.getItem('history') === null) {
       localStorage.setItem('history', JSON.stringify([]));
@@ -153,7 +153,7 @@ export const load_history = () => {
   }
 };
 
-export const get_button_index = button_element => {
+export function get_button_index(button_element) {
   const history_record = 
     button_element
     .parentElement

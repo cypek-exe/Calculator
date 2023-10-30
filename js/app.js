@@ -2,7 +2,8 @@ import {
   select,
   first_number,
   second_number,
-  equal
+  equal,
+  are_values_completed
 } from './math-utils.js';
 
 import {
@@ -57,11 +58,14 @@ const refresh_select = () => {
 
 const reverse = () => {
   if (are_values_completed()) {
-    const tmp = first_number.value;
-
-    first_number.value  = second_number.value;
-    second_number.value = tmp;
-
+    // swapping variables using destructuring
+    [
+      first_number .value,
+      second_number.value
+    ] = [
+      second_number.value,
+      first_number .value
+    ]
     equal();
   }
 }
