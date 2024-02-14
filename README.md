@@ -17,5 +17,4 @@ To test click [here](https://cypek.ct8.pl/calculator/).
 
 ## The calculator uses:
 - modules from **ES6**;
-- object-oriented programming with **ES6**;
 - arrow functions.
